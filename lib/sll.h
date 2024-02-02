@@ -20,12 +20,20 @@ typedef struct sll_node
 typedef struct sll
 {
   sll_node_t *head;
+  void (*print_list)(void *);
 }sll_t;
 
+
 /* function to create and return the new empty SLL */
-sll_t *create_sll(void);
+sll_t *sll_create(void);
 
 /* function to insert the data at the end of SLL */
-int insert_at_end(sll_t *dll, void *app_data);
+int sll_insert_at_end(sll_t *sll, void *app_data);
+
+/* callback registration functions */
+void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *));
+
+/* function to print the SLL */
+int sll_print_list(sll_t *sll);
 
 #endif /* __SLL_H_ */

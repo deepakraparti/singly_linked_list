@@ -16,17 +16,28 @@
  * This function creates and initializes SLL.
  * It provides the empty list.
  */
-sll_t *create_sll(void)
+sll_t *sll_create(void)
 {
   sll_t *sll = calloc(1, sizeof(sll_t));
   sll->head = NULL;
+  sll->print_list = NULL;
   return sll;
 }
+
+
+/*
+ * Function to register the callback to print the SLL data
+ */
+void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *))
+{
+  sll->print_list = print_list;
+}
+
 
 /* 
  * This function adds the data sent by the application to the SLL.
  */
-int insert_at_end(sll_t *sll, void *app_data)
+int sll_insert_at_end(sll_t *sll, void *app_data)
 {
   if (sll == NULL || app_data == NULL)
   {
@@ -56,3 +67,29 @@ int insert_at_end(sll_t *sll, void *app_data)
 
   return 0;
 }
+
+
+/*
+ * This function is a generic print function.
+ * It will print the data from the list
+ */
+int sll_print_list(sll_t *sll)
+{
+  if (sll == NULL)
+  {
+    return -1;
+  }
+
+  sll_node_t *head = sll->head;
+
+  printf("================================\n");
+
+  while(head)
+  {
+    sll->print_list(head->data);
+    head = head->next;
+  }
+
+  printf("================================\n");
+}
+
