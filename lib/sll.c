@@ -93,3 +93,30 @@ int sll_print_list(sll_t *sll)
   printf("================================\n");
 }
 
+
+/*
+ * This function reverses the SLL
+ */
+int sll_reverse(sll_t *sll)
+{
+  if (sll == NULL)
+  {
+    return -1;
+  }
+
+  sll_node_t *head = sll->head;
+  sll_node_t *next = NULL;
+  sll_node_t *prev = NULL;
+
+  while(head)
+  {
+    next = head->next;
+    head->next = prev;
+    prev = head;
+    head = next;
+  }
+
+  /* point SLL head to end of list */
+  sll->head = prev;
+}
+

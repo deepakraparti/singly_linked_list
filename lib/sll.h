@@ -36,4 +36,8 @@ void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *));
 /* function to print the SLL */
 int sll_print_list(sll_t *sll);
 
+/* function to reverse the SLL */
+int sll_reverse(sll_t *sll);
+
+
 #endif /* __SLL_H_ */

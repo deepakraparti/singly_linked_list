@@ -64,5 +64,11 @@ int main(void)
   /* print SLL data */
   sll_print_list(student_list);
 
+  /* reverse SLL */
+  sll_reverse(student_list);
+
+  /* print reversed SLL */
+  sll_print_list(student_list);
+
   return 0;
 }
