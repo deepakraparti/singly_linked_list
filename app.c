@@ -71,6 +71,14 @@ int main(void)
   /* print SLL data */
   sll_print_list(student_list);
 
+  /* delete data from SLL */
+  sll_delete_front(student_list);
+  sll_delete_end(student_list);
+  sll_delete_at_pos(student_list, 2);
+
+  /* print SLL data */
+  sll_print_list(student_list);
+
   /* reverse SLL */
   sll_reverse(student_list);
 
