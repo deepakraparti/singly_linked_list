@@ -13,8 +13,8 @@ sll.o:lib/sll.c
 	gcc -c -I lib/ lib/sll.c -o lib/sll.o
 
 clean:
-	rm lib/sll.o
-	rm lib/libsll.a
-	rm app.o
+	rm lib/*.o
+	rm lib/*.a
+	rm *.o
 	rm app
 
