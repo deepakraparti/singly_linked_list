@@ -28,14 +28,15 @@ typedef struct sll
 /* function to create and return the new empty SLL */
 sll_t *sll_create(void);
 
-/* function to insert the data at the end of SLL */
+/* function to insert the data into SLL */
 int sll_insert_at_end(sll_t *sll, void *app_data);
-
-/* function to insert the data at the front of SLL */
 int sll_insert_at_front(sll_t *sll, void *app_data);
-
-/* function to insert the data at the specified position of SLL */
 int sll_insert_at_pos(sll_t *sll, void *app_data, int pos);
+
+/* function to delete the data from SLL */
+int sll_delete_front(sll_t *sll);
+int sll_delete_end(sll_t *sll);
+int sll_delete_at_pos(sll_t *sll, int pos);
 
 /* callback registration functions */
 void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *));

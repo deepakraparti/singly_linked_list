@@ -134,7 +134,6 @@ int sll_insert_at_pos(sll_t *sll, void *app_data, int pos)
     return -1;
   }
 
-  sll_node_t *head = sll->head;
   sll_node_t *new_node = calloc(1, sizeof(sll_node_t));
   new_node->next = NULL;
   new_node->data = app_data;
@@ -152,6 +151,8 @@ int sll_insert_at_pos(sll_t *sll, void *app_data, int pos)
   }
   else
   {
+    sll_node_t *head = sll->head;
+
     while(i < pos - 1)
     {
       head = head->next;
@@ -161,6 +162,185 @@ int sll_insert_at_pos(sll_t *sll, void *app_data, int pos)
     new_node->next = head->next;
     head->next = new_node;
     sll->len++;
+  }
+
+  return 0;
+}
+
+
+/*
+ * sll_delete_front
+ *
+ * This function deletes front node from the SLL. If the list is empty,
+ * no action will be performed.
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ *
+ * @return 0 if SUCCESS and -1 on failure
+ */
+int sll_delete_front(sll_t *sll)
+{
+  if (sll == NULL)
+  {
+    return -1;
+  }
+
+  if (sll->head == NULL)
+  {
+    printf("List is empty\n");
+  }
+  else
+  {
+    sll_node_t *front = sll->head;
+    sll->head = sll->head->next;
+
+    free(front);
+    front = NULL;
+
+    sll->len--;
+  }
+
+  return 0;
+}
+
+
+/*
+ * sll_delete_end
+ *
+ * This function deletes end node from the SLL. If the list is empty,
+ * no action will be performed.
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ *
+ * @return 0 if SUCCESS and -1 on failure
+ */
+int sll_delete_end(sll_t *sll)
+{
+  sll_node_t *prev = NULL;
+
+  if (sll == NULL)
+  {
+    return -1;
+  }
+
+  if (sll->head == NULL)
+  {
+    printf("List is empty\n");
+  }
+  else
+  {
+    sll_node_t *temp = sll->head;
+
+    while(temp->next != NULL)
+    {
+      prev = temp;
+      temp = temp->next;
+    }
+
+    free(temp);
+    temp = NULL;
+    prev->next = NULL;
+
+    sll->len--;
+  }
+
+  return 0;
+}
+
+
+/*
+ * sll_delete_at_pos
+ *
+ * This function deletes the node specified by position from the SLL. If 
+ * the list is empty no action will be performed.
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ * @param[in]     pos          Position of the node to be deleted
+ *
+ * @return 0 if SUCCESS and -1 on failure
+ */
+int sll_delete_at_pos(sll_t *sll, int pos)
+{
+  int i = 1;
+
+  if (sll == NULL)
+  {
+    return -1;
+  }
+
+  if (sll->head == NULL)
+  {
+    printf("List is empty\n");
+  }
+  else if (pos > sll->len)
+  {
+    printf("Position entered is out of range\n");
+  }
+  else if (pos == 1)
+  {
+    sll_delete_front(sll);
+  }
+  else
+  {
+    sll_node_t *temp = sll->head;
+    sll_node_t *node = NULL;
+
+    while (i < pos - 1)
+    {
+      temp = temp->next;
+      i++;
+    }
+
+    node = temp->next;
+    temp->next = node->next;
+
+    free(node);
+    node = NULL;
+
+    sll->len--;
+  }
+
+  return 0;
+}
+
+
+/*
+ * sll_reverse
+ *
+ * This function reverses the SLL
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ *
+ * @return 0 if SUCCESS and -1 on failure
+ */
+int sll_reverse(sll_t *sll)
+{
+  sll_node_t *next = NULL;
+  sll_node_t *prev = NULL;
+
+  if (sll == NULL)
+  {
+    return -1;
+  }
+
+  if (sll->head == NULL)
+  {
+    printf("List is empty\n");
+  }
+  else
+  {
+    sll_node_t *head = sll->head;
+
+    while(head)
+    {
+      next = head->next;
+      head->next = prev;
+      prev = head;
+      head = next;
+    }
+
+    /* point SLL head to end of list */
+    sll->head = prev;
   }
 
   return 0;
@@ -195,40 +375,5 @@ int sll_print_list(sll_t *sll)
   }
 
   printf("================================\n");
-}
-
-
-/*
- * sll_reverse
- *
- * This function reverses the SLL
- *
- * @param[in]     sll          Pointer to singly linked list
- *
- * @return 0 if SUCCESS and -1 on failure
- */
-int sll_reverse(sll_t *sll)
-{
-  if (sll == NULL)
-  {
-    return -1;
-  }
-
-  sll_node_t *head = sll->head;
-  sll_node_t *next = NULL;
-  sll_node_t *prev = NULL;
-
-  while(head)
-  {
-    next = head->next;
-    head->next = prev;
-    prev = head;
-    head = next;
-  }
-
-  /* point SLL head to end of list */
-  sll->head = prev;
-
-  return 0;
 }
 
