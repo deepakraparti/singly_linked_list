@@ -32,6 +32,14 @@ void print_student_data(void *data)
   printf("-----------------------------\n");
 }
 
+/* search callback function */
+static int search_by_roll_no(void *data, void *key)
+{
+  student_t *student = (student_t *) data;
+
+  return (student->roll_no == (int)key) ? 0 : -1; 
+}
+
 
 int main(void)
 {
@@ -40,6 +48,7 @@ int main(void)
 
   /* register the callbacks */
   sll_register_print_list_callback(student_list, print_student_data);
+  sll_register_search_callback(student_list, search_by_roll_no);
 
   /* students data */
   student_t *s1 = calloc(1, sizeof(student_t));
@@ -85,5 +94,15 @@ int main(void)
   /* print reversed SLL */
   sll_print_list(student_list);
 
+  student_t *student = sll_search(student_list, (void *)2);
+  if (!student)
+  {
+    printf("Student details not found\n");
+  }
+  else
+  {
+    print_student_data(student);
+  }
+ 
   return 0;
 }

@@ -25,21 +25,13 @@ sll_t *sll_create(void)
   sll->head = NULL;
   sll->len = 0;
   sll->print_list = NULL;
+  sll->search = NULL;
   return sll;
 }
 
 
-/*
- * Function to register the callback to print the SLL data
- */
-void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *))
-{
-  sll->print_list = print_list;
-}
-
-
 /* 
- * sll_inser_at_end
+ * sll_insert_at_end
  *
  * This function adds the data sent by the application to the SLL.
  *
@@ -344,6 +336,57 @@ int sll_reverse(sll_t *sll)
   }
 
   return 0;
+}
+
+
+/*
+ * Function to register the callback to search the data in SLL
+ */
+void sll_register_search_callback(sll_t *sll, int (*search)(void *, void *))
+{
+  sll->search = search;
+}
+
+
+
+/* sll_search
+ *
+ * This function is a generic search function.
+ * It accepts the key as an input and searches the SLL for existence
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ * @param[in]     key          Pointer to the key
+ *
+ * @return the data if SUCCESS and NULL on failure
+ */
+void *sll_search(sll_t *sll, void *key)
+{
+  if (sll == NULL || sll->head == NULL)
+  {
+    return NULL;
+  }
+
+  sll_node_t *temp = sll->head;
+
+  while(temp)
+  {
+    if (sll->search(temp->data, key) == 0)
+    {
+      return (void *) temp->data;
+    }
+
+    temp = temp->next;
+  }
+
+  return NULL;
+}
+
+/*
+ * Function to register the callback to print the SLL data
+ */
+void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *))
+{
+  sll->print_list = print_list;
 }
 
 

@@ -22,6 +22,7 @@ typedef struct sll
   sll_node_t *head;
   unsigned int len;
   void (*print_list)(void *);
+  int (*search)(void *, void *);
 }sll_t;
 
 
@@ -40,12 +41,15 @@ int sll_delete_at_pos(sll_t *sll, int pos);
 
 /* callback registration functions */
 void sll_register_print_list_callback(sll_t *sll, void (*print_list)(void *));
+void sll_register_search_callback(sll_t *sll, int (*search)(void *, void *));
 
 /* function to print the SLL */
 int sll_print_list(sll_t *sll);
 
+/* function to search the data using key in SLL */
+void *sll_search(sll_t *sll, void *key);
+
 /* function to reverse the SLL */
 int sll_reverse(sll_t *sll);
-
 
 #endif /* __SLL_H_ */
