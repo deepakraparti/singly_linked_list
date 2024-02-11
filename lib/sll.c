@@ -26,6 +26,7 @@ sll_t *sll_create(void)
   sll->len = 0;
   sll->print_list = NULL;
   sll->search = NULL;
+  sll->compare = NULL;
   return sll;
 }
 
@@ -379,6 +380,56 @@ void *sll_search(sll_t *sll, void *key)
   }
 
   return NULL;
+}
+
+
+/*
+ * Function to register the callback to sort the SLL in ascending order
+ */
+void sll_register_compare_callback(sll_t *sll, int (*compare)(void *, void *))
+{
+  sll->compare = compare;
+}
+
+
+
+/* sll_sort_ascending
+ *
+ * This function is a generic sort function.
+ * It sorts the SLL in ascending order
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ *
+ * @return 
+ */
+void sll_sort_ascending(sll_t *sll)
+{
+  if(sll == NULL || sll->head == NULL)
+  {
+    return;
+  }
+
+  sll_node_t *node1 = sll->head;
+  sll_node_t *node2 = NULL;
+  void *temp = NULL;
+
+  while (node1 != NULL)
+  {
+    node2 = node1->next;
+    while (node2 != NULL)
+    {
+      if (sll->compare(node1->data, node2->data) == 1)
+      {
+        temp = node1->data;
+        node1->data = node2->data;
+        node2->data = temp;
+      }
+
+      node2 = node2->next;
+    }
+
+    node1 = node1->next;
+  }
 }
 
 /*
