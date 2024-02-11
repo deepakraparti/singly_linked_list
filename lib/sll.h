@@ -57,4 +57,10 @@ void sll_sort_ascending(sll_t *sll);
 /* function to print the SLL */
 int sll_print_list(sll_t *sll);
 
+/* function to search the data using key in SLL */
+void *sll_search(sll_t *sll, void *key);
+
+/* function to reverse the SLL */
+int sll_reverse(sll_t *sll);
+
 #endif /* __SLL_H_ */

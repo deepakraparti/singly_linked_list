@@ -32,6 +32,7 @@ void print_student_data(void *data)
   printf("-----------------------------\n");
 }
 
+
 /* search callback function */
 static int search_by_roll_no(void *data, void *key)
 {
@@ -39,6 +40,7 @@ static int search_by_roll_no(void *data, void *key)
 
   return (student->roll_no == (int)key) ? 0 : -1; 
 }
+
 
 /* compare callback function */
 static int compare_student_by_roll_no(void *student1, void *student2)
@@ -143,5 +145,6 @@ int main(void)
   /* print SLL data */
   sll_print_list(student_list);
 #endif
+  
   return 0;
 }

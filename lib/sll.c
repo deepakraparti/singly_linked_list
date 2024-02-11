@@ -384,13 +384,12 @@ void *sll_search(sll_t *sll, void *key)
 
 
 /*
- * Function to register the callback to sort the SLL in ascending order
+ * Function to register the callback to compare the SLL data
  */
 void sll_register_compare_callback(sll_t *sll, int (*compare)(void *, void *))
 {
   sll->compare = compare;
 }
-
 
 
 /* sll_sort_ascending
@@ -432,6 +431,7 @@ void sll_sort_ascending(sll_t *sll)
   }
 }
 
+
 /*
  * Function to register the callback to print the SLL data
  */
@@ -470,4 +470,3 @@ int sll_print_list(sll_t *sll)
 
   printf("================================\n");
 }
-
