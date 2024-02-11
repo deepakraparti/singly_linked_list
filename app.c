@@ -32,12 +32,34 @@ void print_student_data(void *data)
   printf("-----------------------------\n");
 }
 
+
 /* search callback function */
 static int search_by_roll_no(void *data, void *key)
 {
   student_t *student = (student_t *) data;
 
   return (student->roll_no == (int)key) ? 0 : -1; 
+}
+
+
+/* compare callback function */
+static int compare_student_by_roll_no(void *student1, void *student2)
+{
+  student_t *st1 = (student_t *)student1;
+  student_t *st2 = (student_t *)student2;
+
+  if (st1->roll_no > st2->roll_no)
+  {
+    return 1;
+  }
+  else if (st1->roll_no < st2->roll_no)
+  {
+    return -1;
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 
@@ -49,6 +71,7 @@ int main(void)
   /* register the callbacks */
   sll_register_print_list_callback(student_list, print_student_data);
   sll_register_search_callback(student_list, search_by_roll_no);
+  sll_register_compare_callback(student_list, compare_student_by_roll_no);
 
   /* students data */
   student_t *s1 = calloc(1, sizeof(student_t));
@@ -71,6 +94,7 @@ int main(void)
   s4->age = 14;
   s4->roll_no = 4;
 
+#if 0
   /* insert data into SLL */
   sll_insert_at_end(student_list, s2);
   sll_insert_at_end(student_list, s4);
@@ -103,6 +127,24 @@ int main(void)
   {
     print_student_data(student);
   }
- 
+
+#else
+
+  /* insert data into SLL */
+  sll_insert_at_front(student_list, s1);
+  sll_insert_at_front(student_list, s2);
+  sll_insert_at_front(student_list, s3);
+  sll_insert_at_front(student_list, s4);
+
+  /* print SLL data */
+  sll_print_list(student_list);
+
+  /* Sort the list */
+  sll_sort_ascending(student_list);
+
+  /* print SLL data */
+  sll_print_list(student_list);
+#endif
+  
   return 0;
 }
