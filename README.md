@@ -1,4 +1,5 @@
 # Singly Linked List Library
+[![.github/workflows/c-cpp.yml](https://github.com/deepakraparti/singly_linked_list/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/deepakraparti/singly_linked_list/actions/workflows/c-cpp.yml)
 This is a generic library which is implemented in C language. It covers below functionalities:
 1. Insert the node
  a. At the beginning
