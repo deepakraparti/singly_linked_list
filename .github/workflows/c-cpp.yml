@@ -16,8 +16,8 @@ jobs:
     - name: make
       run: make
       
-    - uses: actions/github-script@v5  
-    - name: Report success status
+    - name: Report success status  
+    - uses: actions/github-script@v7
       with:
        github-token: ${{ secrets.GITHUB_TOKEN }}
        script: |
