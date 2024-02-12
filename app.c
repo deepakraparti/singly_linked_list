@@ -144,6 +144,17 @@ int main(void)
 
   /* print SLL data */
   sll_print_list(student_list);
+
+  printf("Records in student list:%u\n", sll_length(student_list));
+
+  if (sll_is_empty(student_list))
+  {
+    printf("Student list is empty\n");
+  }
+  else
+  {
+    printf("Student list is not empty\n");
+  }
 #endif
   
   return 0;

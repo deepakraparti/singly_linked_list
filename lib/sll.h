@@ -11,20 +11,10 @@
 #ifndef __SLL_H_
 #define __SLL_H_
 
-typedef struct sll_node
-{
-  void *data;
-  struct sll_node *next;
-}sll_node_t;
+#include <stdbool.h>
 
-typedef struct sll
-{
-  sll_node_t *head;
-  unsigned int len;
-  void (*print_list)(void *);
-  int (*search)(void *, void *);
-  int (*compare)(void *, void *);
-}sll_t;
+
+typedef struct sll sll_t;  //forward declaration
 
 
 /* function to create and return the new empty SLL */
@@ -62,5 +52,9 @@ void *sll_search(sll_t *sll, void *key);
 
 /* function to reverse the SLL */
 int sll_reverse(sll_t *sll);
+
+/* Utility functions */
+bool sll_is_empty(sll_t *sll);
+unsigned int sll_length(sll_t *sll);
 
 #endif /* __SLL_H_ */
