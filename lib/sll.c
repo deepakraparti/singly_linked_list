@@ -12,6 +12,22 @@
 #include "sll.h"
 
 
+typedef struct sll_node
+{
+  void *data;
+  struct sll_node *next;
+}sll_node_t;
+
+struct sll
+{
+  sll_node_t *head;
+  unsigned int len;
+  void (*print_list)(void *);
+  int (*search)(void *, void *);
+  int (*compare)(void *, void *);
+};
+
+
 /* sll_create
  *
  * This function creates and initializes SLL.
@@ -469,4 +485,42 @@ int sll_print_list(sll_t *sll)
   }
 
   printf("================================\n");
+}
+
+
+/*
+ * sll_is_empty
+ *
+ * This functions tells if the SLL is empty.
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ *
+ * @return true if list is empty otherwise false
+ */
+bool sll_is_empty(sll_t *sll)
+{
+  if (sll == NULL || sll->head == NULL)
+  {
+    // List is empty
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+
+/*
+ * sll_length
+ *
+ * This functions retrieves the length of the SLL
+ *
+ * @param[in]     sll          Pointer to singly linked list
+ *
+ * @return Length of SLL
+ */
+unsigned int sll_length(sll_t *sll)
+{
+  return sll->len; 
 }
