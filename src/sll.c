@@ -485,6 +485,8 @@ int sll_print_list(sll_t *sll)
   }
 
   printf("================================\n");
+
+  return 0;
 }
 
 
