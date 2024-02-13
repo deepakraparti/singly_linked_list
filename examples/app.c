@@ -7,9 +7,10 @@
  */
 
 
-#include <string.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "sll.h"
 
 
@@ -38,7 +39,7 @@ static int search_by_roll_no(void *data, void *key)
 {
   student_t *student = (student_t *) data;
 
-  return (student->roll_no == (int)key) ? 0 : -1; 
+  return (student->roll_no == (intptr_t)key) ? 0 : -1; 
 }
 
 
