@@ -75,22 +75,22 @@ int main(void)
 
   /* students data */
   student_t *s1 = calloc(1, sizeof(student_t));
-  strncpy(s1->name, "Ram", strlen("Ram"));
+  memcpy(s1->name, "Ram", strlen("Ram"));
   s1->age = 14;
   s1->roll_no = 1;
 
   student_t *s2 = calloc(1, sizeof(student_t));
-  strncpy(s2->name, "Jakson", strlen("Jakson"));
+  memcpy(s2->name, "Jakson", strlen("Jakson"));
   s2->age = 13;
   s2->roll_no = 2;
 
   student_t *s3 = calloc(1, sizeof(student_t));
-  strncpy(s3->name, "Serene", strlen("Serene"));
+  memcpy(s3->name, "Serene", strlen("Serene"));
   s3->age = 13;
   s3->roll_no = 3;
 
   student_t *s4 = calloc(1, sizeof(student_t));
-  strncpy(s4->name, "Alex", strlen("Alex"));
+  memcpy(s4->name, "Alex", strlen("Alex"));
   s4->age = 14;
   s4->roll_no = 4;
 
