@@ -25,7 +25,7 @@ This repository contains a generic singly linked list C library capable of gener
   - Determine the length of the list
   - Check if the list is empty
 
-# Directory Structure
+## Directory Structure
 
 This repository follows the following directory structure:
 - `src/`: Contains the source code for the singly linked list library.
