@@ -12,23 +12,30 @@ BIN_DIR = bin
 LDFLAGS = -L$(LIB_DIR) -lsll
 
 # Static library file
-LIB_FILES = $(LIB_DIR)/libsll.a
+STATIC_LIB_FILE = $(LIB_DIR)/libsll.a
+DYN_LIB_FILE = $(LIB_DIR)/libsll.so
 
 TARGET = all
 
 .PHONY: all clean
 
-$(TARGET): lib app
+$(TARGET): static_lib dynamic_lib app
 
-lib: $(BUILD_DIR)/sll.o
+static_lib: $(BUILD_DIR)/sll.o
 	@mkdir -p $(LIB_DIR)
-	ar -rs $(LIB_FILES) $(BUILD_DIR)/sll.o
+	ar -rs $(STATIC_LIB_FILE) $(BUILD_DIR)/sll.o
 
 $(BUILD_DIR)/sll.o: $(SRC_DIR)/sll.c
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c -I $(SRC_DIR)/ $(SRC_DIR)/sll.c -o $(BUILD_DIR)/sll.o
 
-app: $(BUILD_DIR)/app.o $(LIB_FILES)
+dynamic_lib: $(BUILD_DIR)/d_sll.o
+	$(CC) -shared -o $(DYN_LIB_FILE) $(BUILD_DIR)/d_sll.o
+
+$(BUILD_DIR)/d_sll.o: $(SRC_DIR)/sll.c
+	$(CC) -c -fPIC -I $(SRC_DIR) $(SRC_DIR)/sll.c -o $(BUILD_DIR)/d_sll.o
+
+app: $(BUILD_DIR)/app.o $(DYN_LIB_FILE)
 	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $(BUILD_DIR)/app.o -o $(BIN_DIR)/app $(LDFLAGS)
 
